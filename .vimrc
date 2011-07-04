@@ -17,6 +17,7 @@
 "               - F2    toggle Nerd tree
 "               - F3    cscope
 "               - F4    taglist
+"               - F5    quick buffer
 "               - F11   toggle fullscreen (windows only)
 "               - F12   c-style comment current line
 "
@@ -259,8 +260,7 @@ set display=lastline,uhex
 set fillchars=vert:\|,fold:-
 set formatoptions+=Mmn
 set guioptions=egmrt "no toolbar(T)
-"set guitablabel=%f "see error-file-format
-set guitablabel=%{tabpagenr()}.%t\ %m
+set guitablabel=%t\ %m
 set ignorecase smartcase
 set incsearch
 set laststatus=2
@@ -275,11 +275,11 @@ set ruler
 set scroll=8
 set selection=inclusive
 set selectmode=""
-set spell
+set nospell
 set spelllang=en
 set splitright
 set showcmd
-set statusline=%f%m\ \[%{&ff}:%{&fenc}:%Y]\ %{getcwd()}%=(%b,0x%B)(%l\/%L\|%c%V)%P%<
+set statusline=%{getcwd()}%=\[%{&ff}:%{&fenc}:%Y]\[%b,0x%B\](%l\/%L\|%c%V)%P%<
 set undolevels=500
 set updatetime=500
 set virtualedit=block
@@ -305,7 +305,7 @@ let Tlist_Use_Right_Window = 1
 let Tlist_Show_One_File = 1
 let g:fencview_autodetect = 0  "disable fencview_autodetect
 let g:load_doxygen_syntax = 1 "doxygen syntax support.
-let g:qb_hotkey = '<s-space>'
+let g:qb_hotkey = '<F5>'
 
 " [presistent-undo]
 let &undodir = s:vimtmp
@@ -324,7 +324,7 @@ if has("autocmd") && !exists("autocommands_loaded")
     let autocommands_loaded=1
     filetype plugin indent on
     
-    autocmd BufReadPost *.h,*.c,*.cpp let &cc = s:cc_default
+    autocmd BufReadPost *.h,*.c,*.cpp,*.vim let &cc = s:cc_default
     autocmd CursorMoved *.h,*.c,*.cpp call ColumnHighlight()
 
     autocmd BufReadPost * call DoAutoComplete()
@@ -381,8 +381,8 @@ nnoremap    gns     :cs find s <c-r>=expand("<cword>")<cr><cr>
 nnoremap    gnt     :cs find t <c-r>=expand("<cword>")<cr><cr>
 
 " [Preview and switch tags]
-nnoremap    <space> <c-w>}
-nnoremap    <m-space> <c-w>g}
+" nnoremap    <space> <c-w>}
+" nnoremap    <m-space> <c-w>g}
 nnoremap    <m-]>   :tn<cr>
 nnoremap    <m-[>   :tp<cr>
 
@@ -438,6 +438,10 @@ nnoremap    gJ      J
 nnoremap    -       _
 nnoremap    _       -
 
+" [easy motion]
+nmap        <space> \f
+nmap        <s-space> \F
+
 " [F2 to toggle the winmanager]
 nnoremap    <F2>    :NERDTreeToggle<cr>
 
@@ -445,7 +449,7 @@ nnoremap    <F2>    :NERDTreeToggle<cr>
 nnoremap    <F3>    :call SetupCscope()<cr>
 
 " [F4 to toggle the taglist]
-nnoremap    <F4>    :TlistToggle<cr>
+nnoremap    <F4>    :TagbarToggle<cr>
 
 " [comment out current line]
 nnoremap    <F12>   I/*<esc>A*/<esc>
@@ -467,15 +471,14 @@ command!    DiffOrig         vert new | set bt=nofile | r # | 0d_ | diffthis | w
 
 " Menus: {{{1
 "--------------------------------------------------
-menu        &Misc.Add\ Header                     :AddHeader<cr>
-menu        &Misc.Add\ Doxygen\ Comment           :Dox<cr>
-menu        &Misc.-sep1-                          :
-menu        &Misc.Create\ ctags                   :CPPtags<cr>
-menu        &Misc.Astyle_format                   :ASTYLE<cr>
-menu        &Misc.Unique\ lines                   :UniqueLine<cr>
-menu        &Misc.Edit\ vimrc                     :VIMRC<cr>
-menu        &Misc.-sep2-                          :
-menu        &Misc.Renamer                         :Renamer<cr>
-menu        &Misc.Toggle\ Sketch                  :call ToggleSketch()<cr>
+menu        &Plugins.Toggle\ Sketch                 :call ToggleSketch()<cr>
+menu        &Plugins.Renamer                        :Renamer<cr>
+menu        &Misc.Add\ Header                       :AddHeader<cr>
+menu        &Misc.Add\ Doxygen\ Comment             :Dox<cr>
+menu        &Misc.-sep1-                            :
+menu        &Misc.Create\ ctags                     :CPPtags<cr>
+menu        &Misc.Astyle_format                     :ASTYLE<cr>
+menu        &Misc.Unique\ lines                     :UniqueLine<cr>
+menu        &Misc.Edit\ vimrc                       :VIMRC<cr>
 
 " vim: set ft=vim ff=unix fdm=marker :

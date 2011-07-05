@@ -16,7 +16,7 @@
 " HotKey:
 "               - F2    toggle Nerd tree
 "               - F3    cscope
-"               - F4    taglist
+"               - F4    tagbar
 "               - F5    quick buffer
 "               - F11   toggle fullscreen (windows only)
 "               - F12   c-style comment current line
@@ -300,9 +300,9 @@ set diffopt=filler,vertical
 
 " [plugin options]
 let netrw_longlist = 1  "netrw
-let Tlist_File_Fold_Auto_Close = 1    "taglist
-let Tlist_Use_Right_Window = 1
-let Tlist_Show_One_File = 1
+"let Tlist_File_Fold_Auto_Close = 1    "taglist
+"let Tlist_Use_Right_Window = 1
+"let Tlist_Show_One_File = 1
 let g:fencview_autodetect = 0  "disable fencview_autodetect
 let g:load_doxygen_syntax = 1 "doxygen syntax support.
 let g:qb_hotkey = '<F5>'
@@ -316,6 +316,9 @@ if getftype(&undodir) != "dir"
 endif
 set undofile
 let &directory = s:vimtmp
+
+" [TOHtml settings]
+let html_dynamic_folds = 1
 
 " Autocommands: {{{1
 "--------------------------------------------------
@@ -391,10 +394,10 @@ vnoremap    <silent> *  y/<C-R>=escape(@", '\\/.*$^~[]')<CR><CR>
 vnoremap    <silent> #  y?<C-R>=escape(@", '\\/.*$^~[]')<CR><CR>
 
 " [Alt-... to mark and jump]
-xmap        <m-m>   \m
-nmap        <m-m>   \m
-nmap        <m-n>   \/
-nmap        <m-b>   \?
+xmap        <m-m>   <leader>m
+nmap        <m-m>   <leader>m
+nmap        <m-n>   <leader>/
+nmap        <m-b>   <leader>?
 
 " [CTRL-hjkl to browse command history and move the cursor]
 cnoremap    <c-k>   <up>
@@ -439,8 +442,8 @@ nnoremap    -       _
 nnoremap    _       -
 
 " [easy motion]
-nmap        <space> \f
-nmap        <s-space> \F
+nmap        <space> <leader>f
+nmap        <s-space> <leader>F
 
 " [F2 to toggle the winmanager]
 nnoremap    <F2>    :NERDTreeToggle<cr>
@@ -448,7 +451,7 @@ nnoremap    <F2>    :NERDTreeToggle<cr>
 " [F3 to start cscope session]
 nnoremap    <F3>    :call SetupCscope()<cr>
 
-" [F4 to toggle the taglist]
+" [F4 to toggle the tagbar]
 nnoremap    <F4>    :TagbarToggle<cr>
 
 " [comment out current line]

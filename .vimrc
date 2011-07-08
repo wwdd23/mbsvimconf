@@ -292,7 +292,7 @@ set wrap
 set tabstop=4
 set shiftwidth=4
 set softtabstop=0
-set expandtab
+"set expandtab
 set smarttab
 
 " [diff options]
@@ -442,8 +442,8 @@ nnoremap    -       _
 nnoremap    _       -
 
 " [easy motion]
-nmap        <space> <leader>f
-nmap        <s-space> <leader>F
+nmap        <space> H0<leader>f
+"nmap        <s-space> <leader>F
 
 " [F2 to toggle the winmanager]
 nnoremap    <F2>    :NERDTreeToggle<cr>

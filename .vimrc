@@ -130,7 +130,7 @@ let s:hlflag=0
 function! ColumnHighlight()
     let c=getline(line('.'))[col('.') - 1]
     if c=='{' || c=='}'
-        let &cc = s:cc_default . ',' . col('.')
+        let &cc = s:cc_default . ',' . virtcol('.')
         let s:hlflag = 1
     else
         if s:hlflag == 1
@@ -235,6 +235,7 @@ endif
 
 " [gui and color options]
 if has("gui_running")
+    set langmenu=C
     colorscheme desertEx
     set hlsearch
     set mousemodel=popup

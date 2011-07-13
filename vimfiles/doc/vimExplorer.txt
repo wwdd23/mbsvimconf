@@ -553,7 +553,6 @@ P2.  'wildignre' option cause some files disappeared.
     -   Rename file when file exsits in copy operation.
     -   Compress file.
     -   Send to.
-    linux下面 ctrl-G 的问题
 
 
 ==============================================================================

@@ -250,7 +250,7 @@ elseif &t_Co >2
 endif
 
 " [common options]
-language message en_US.ISO_8859-1
+language message en_US.UTF-8
 set autoindent
 set smartindent
 set ambiwidth=double
@@ -308,14 +308,20 @@ let g:fencview_autodetect = 0  "disable fencview_autodetect
 let g:load_doxygen_syntax = 1 "doxygen syntax support.
 let g:qb_hotkey = '<F5>'
 
-" [presistent-undo]
-let &undodir = s:vimtmp
-if getftype(&undodir) != "dir"
-    if mkdir(&undodir) == 0
-        echoerr "Can not create undo directory: ".&undodir
-    endif
+" [create temp dir if not exists]
+if getftype(s:vimtmp) != "dir"
+	if mkdir(s:vimtmp) == 0
+		echoerr "Can not create undo directory: ".s:vimtmp
+	endif
 endif
-set undofile
+
+" [presistent-undo]
+if has("persistent_undo")
+	let &undodir = s:vimtmp
+    set undofile
+endif
+
+" [swap folder]
 let &directory = s:vimtmp
 
 " [TOHtml settings]
@@ -485,4 +491,4 @@ menu        &Misc.Astyle_format                     :ASTYLE<cr>
 menu        &Misc.Unique\ lines                     :UniqueLine<cr>
 menu        &Misc.Edit\ vimrc                       :VIMRC<cr>
 
-" vim: set ft=vim ff=unix fdm=marker :
+" vim: set ts=4 et ft=vim ff=unix fdm=marker :

@@ -236,18 +236,18 @@ endif
 " [gui and color options]
 if has("gui_running")
     set langmenu=C
-    colorscheme desertEx
     set hlsearch
     set mousemodel=popup
     set columns=130
     set lines=45
-    "set helplang=cn
     syntax on
-elseif &t_Co >2
+else
+    set t_Co=256
     set helplang=en
     set hlsearch
-    syntax on
 endif
+colorscheme desertEx
+syntax on
 
 " [common options]
 language message en_US.UTF-8

@@ -334,8 +334,10 @@ if has("autocmd") && !exists("autocommands_loaded")
     let autocommands_loaded=1
     filetype plugin indent on
     
-    autocmd BufReadPost *.h,*.c,*.cpp,*.vim let &cc = s:cc_default
-    autocmd CursorMoved *.h,*.c,*.cpp call ColumnHighlight()
+	if version >= 703
+		autocmd BufReadPost *.h,*.c,*.cpp,*.vim let &cc = s:cc_default
+		autocmd CursorMoved *.h,*.c,*.cpp call ColumnHighlight()
+	endif
 
     autocmd BufReadPost * call DoAutoComplete()
     autocmd BufReadPost quickfix  setlocal nobuflisted

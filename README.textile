@@ -1,0 +1,9 @@
+This is mbbill's personal vim configuration collections.
+Make sure to update submodules first.
+
+h3. Setup
+* Linux
+@$ ln -s ~/location/to/this/repo/vimrc  ~/.vimrc@
+@$ ln -s ~/location/to/this/repo/vimfiles ~/.vim@
+* Win
+@Just copy vimrc and vimfiles to your home dir as _vimrc and vimfiles@
